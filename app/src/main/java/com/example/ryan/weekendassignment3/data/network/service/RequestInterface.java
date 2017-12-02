@@ -1,7 +1,8 @@
-package com.example.ryan.weekendassignment3.services;
+package com.example.ryan.weekendassignment3.data.network.service;
 
-import com.example.ryan.weekendassignment3.model.ParkingSpot;
-import com.example.ryan.weekendassignment3.model.ParkingSpotDetails;
+import com.example.ryan.weekendassignment3.data.network.model.ParkingSpot;
+import com.example.ryan.weekendassignment3.data.network.model.ParkingSpotDetails;
+import com.example.ryan.weekendassignment3.services.Api_List;
 
 import java.util.List;
 
@@ -23,6 +24,6 @@ public interface RequestInterface {
     Observable<ParkingSpotDetails> getParkingSpotDetails(@Path("id") String id);
 
     @POST(Api_List.SPOT_RESERVE)
-    Observable<Void>reserveSpot(@Path("id") String id, @Path("reserve") String reserve);
+    Observable<ParkingSpotDetails>reserveSpot(@Path("id") String id, @Path("reserve") String reserve);
 
 }

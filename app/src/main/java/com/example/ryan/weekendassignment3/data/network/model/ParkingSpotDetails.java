@@ -1,4 +1,4 @@
-package com.example.ryan.weekendassignment3.model;
+package com.example.ryan.weekendassignment3.data.network.model;
 
 /**
  * Created by Ryan on 01/12/2017.
@@ -7,17 +7,17 @@ package com.example.ryan.weekendassignment3.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ParkingSpot {
+public class ParkingSpotDetails {
 
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("lat")
     @Expose
-    private Double lat;
+    private String lat;
     @SerializedName("lng")
     @Expose
-    private Double lng;
+    private String lng;
     @SerializedName("name")
     @Expose
     private String name;
@@ -45,19 +45,19 @@ public class ParkingSpot {
         this.id = id;
     }
 
-    public Double getLat() {
+    public String getLat() {
         return lat;
     }
 
-    public void setLat(Double lat) {
+    public void setLat(String lat) {
         this.lat = lat;
     }
 
-    public Double getLng() {
+    public String getLng() {
         return lng;
     }
 
-    public void setLng(Double lng) {
+    public void setLng(String lng) {
         this.lng = lng;
     }
 

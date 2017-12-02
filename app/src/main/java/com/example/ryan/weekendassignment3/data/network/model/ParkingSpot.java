@@ -1,4 +1,4 @@
-package com.example.ryan.weekendassignment3.model;
+package com.example.ryan.weekendassignment3.data.network.model;
 
 /**
  * Created by Ryan on 01/12/2017.
@@ -7,17 +7,17 @@ package com.example.ryan.weekendassignment3.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ParkingSpotDetails {
+public class ParkingSpot {
 
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("lat")
     @Expose
-    private String lat;
+    private Double lat;
     @SerializedName("lng")
     @Expose
-    private String lng;
+    private Double lng;
     @SerializedName("name")
     @Expose
     private String name;
@@ -35,7 +35,7 @@ public class ParkingSpotDetails {
     private Boolean isReserved;
     @SerializedName("reserved_until")
     @Expose
-    private Object reservedUntil;
+    private String reservedUntil;
 
     public Integer getId() {
         return id;
@@ -45,19 +45,19 @@ public class ParkingSpotDetails {
         this.id = id;
     }
 
-    public String getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public String getLng() {
+    public Double getLng() {
         return lng;
     }
 
-    public void setLng(String lng) {
+    public void setLng(Double lng) {
         this.lng = lng;
     }
 
@@ -101,11 +101,11 @@ public class ParkingSpotDetails {
         this.isReserved = isReserved;
     }
 
-    public Object getReservedUntil() {
+    public String getReservedUntil() {
         return reservedUntil;
     }
 
-    public void setReservedUntil(Object reservedUntil) {
+    public void setReservedUntil(String reservedUntil) {
         this.reservedUntil = reservedUntil;
     }
 

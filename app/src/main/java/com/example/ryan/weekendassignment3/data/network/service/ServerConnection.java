@@ -1,13 +1,11 @@
-package com.example.ryan.weekendassignment3.services;
+package com.example.ryan.weekendassignment3.data.network.service;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
-import com.google.gson.Gson;
+import com.example.ryan.weekendassignment3.services.Api_List;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
