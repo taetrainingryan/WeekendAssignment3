@@ -1,7 +1,9 @@
 package com.example.ryan.weekendassignment3;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.ryan.weekendassignment3.model.ParkingSpot;
@@ -17,18 +19,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_GREEN;
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_RED;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
@@ -80,6 +77,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 marker.showInfoWindow();
 
+                                if(parkingSpotDetails.getIsReserved()!=true){
+
+                                    displaySnackbar(marker);
+
+                                }
+
                             }
                         }, new Consumer<Throwable>() {
                             @Override
@@ -90,10 +93,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         });
 
                 return false;
+
+
             }
         });
     }
 
+    private void displaySnackbar(final Marker marker) {
+
+        View container = findViewById(android.R.id.content);
+
+        // Define the click listener as a member
+        View.OnClickListener snackOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MapsActivity.this, "Spot reserved", Toast.LENGTH_SHORT).show();
+
+                reserveSpot(marker);
+            }
+        };
+
+        if(container!=null) {
+            Snackbar.make(container, R.string.snackbar_text, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.snackbar_action, snackOnClickListener)
+                    .show();
+        }
+    }
+
+    private void reserveSpot(Marker marker) {
+
+        //Toast.makeText(this, marker.getTitle(), Toast.LENGTH_SHORT).show();
+
+        requestInterface.reserveSpot(marker.getTitle(), "reserve")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<Void>() {
+                    @Override
+                    public void accept(Void aVoid) throws Exception {
+
+                    }
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                        throwable.printStackTrace();
+
+                    }
+                });
+
+        Toast.makeText(this, "Spot reserved", Toast.LENGTH_SHORT).show();
+
+        marker.remove();
+        mMap.addMarker(new MarkerOptions().position(marker.getPosition()).title(marker.getTitle())
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).hideInfoWindow();
+
+
+    }
 
 
     public void addMarkers(ParkingSpot parkingSpot, GoogleMap googleMap){
