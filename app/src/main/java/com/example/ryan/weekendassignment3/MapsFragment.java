@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.ryan.weekendassignment3.data.AppDataManager;
-import com.example.ryan.weekendassignment3.data.database.dbModel.RealmController;
-import com.example.ryan.weekendassignment3.data.database.dbModel.RealmReservation;
 import com.example.ryan.weekendassignment3.data.network.model.ParkingSpot;
 import com.example.ryan.weekendassignment3.data.network.model.ParkingSpotDetails;
 import com.example.ryan.weekendassignment3.views.ParkingSpots.ParkingSpotsMvpView;
@@ -36,7 +34,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import io.realm.Realm;
 
 /**
  * A fragment that launches other parts of the demo application.
@@ -46,7 +43,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
     MapView mMapView;
     private GoogleMap googleMap;
     private ParkingSpotsPresenter parkingSpotsPresenter;
-    private RealmController realmController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,9 +53,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         initializePresenter();
-        Realm.init(getContext());
-        realmController = RealmController.getInstance();
-
 
         mMapView.onResume();// needed to get the map to display immediately
 
@@ -195,11 +188,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
         marker.remove();
         googleMap.addMarker(new MarkerOptions().position(marker.getPosition()).title(marker.getTitle())
                 .snippet("Is Reserved: " + parkingSpotDetails.getIsReserved() + "\nReserved until: " + parkingSpotDetails.getReservedUntil())
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).showInfoWindow();
-
-        RealmReservation reservation = new RealmReservation(marker.getTitle(), parkingSpotDetails.getName(), parkingSpotDetails.getReservedUntil());
-
-        realmController.saveReservation(reservation);
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
     }
 
