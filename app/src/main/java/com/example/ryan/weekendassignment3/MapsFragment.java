@@ -1,5 +1,6 @@
 package com.example.ryan.weekendassignment3;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -49,6 +50,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
     private RealmController realmController;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // inflat and return the layout
@@ -59,7 +67,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
         initializePresenter();
         Realm.init(getContext());
         realmController = RealmController.getInstance();
-
 
         mMapView.onResume();// needed to get the map to display immediately
 

@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                     default: return false;
             }
 
-            //updateNavigationBarState(item.getItemId());
             return true;
         }
     };
@@ -44,10 +43,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -68,13 +63,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.fragment_container, new ReservationsFragment()).commit();
     }
 
-//    private void updateNavigationBarState(int actionId){
-//        Menu menu = navigation.getMenu();
-//
-//        for (int i = 0, size = menu.size(); i < size; i++) {
-//            MenuItem item = menu.getItem(i);
-//            item.setChecked(item.getItemId() == actionId);
-//        }
-//    }
 
 }
