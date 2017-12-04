@@ -1,5 +1,7 @@
 package com.example.ryan.weekendassignment3.views.ParkingSpots;
 
+import android.widget.Toast;
+
 import com.example.ryan.weekendassignment3.data.IDataManager;
 import com.example.ryan.weekendassignment3.data.network.model.ParkingSpot;
 import com.example.ryan.weekendassignment3.data.network.model.ParkingSpotDetails;
@@ -40,6 +42,12 @@ public class ParkingSpotsPresenter<V extends ParkingSpotsMvpView>
 
                 getMvpView().onFetchDataSuccess(parkingSpots);
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                throwable.printStackTrace();
+                getMvpView().onFetchDataError("An error has occurred, please try again.");
+            }
         });
 
     }
@@ -55,6 +63,12 @@ public class ParkingSpotsPresenter<V extends ParkingSpotsMvpView>
 
                         getMvpView().onFetchDetails(parkingSpotDetails, marker);
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                        getMvpView().onFetchDataError("An error has occurred please try again");
+                    }
                 });
     }
 
@@ -68,6 +82,12 @@ public class ParkingSpotsPresenter<V extends ParkingSpotsMvpView>
                     public void accept(ParkingSpotDetails parkingSpotDetails) throws Exception {
 
                         getMvpView().reserveParkingSpot(marker, parkingSpotDetails);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                        getMvpView().onFetchDataError("An error has occurred please try again");
                     }
                 });
 

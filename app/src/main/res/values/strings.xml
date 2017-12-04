@@ -2,7 +2,9 @@
     <string name="app_name">WeekendAssignment3</string>
     <string name="title_activity_maps">Map</string>
     <string name="snackbar_action">Reserve</string>
+    <string name="snackbar_action2">Retry</string>
     <string name="snackbar_text">Would you like to reserve this spot?</string>
+    <string name="snackbar_text2">No internet connection detected, please connect and retry</string>
 
     <string name="api_retry_error">Please retry!</string>
     <string name="api_default_error">Something wrong happened!</string>

@@ -19,6 +19,7 @@ import com.example.ryan.weekendassignment3.injection.PresenterComponent;
 import com.example.ryan.weekendassignment3.views.ParkingSpots.ParkingSpotsMvpView;
 import com.example.ryan.weekendassignment3.views.ParkingSpots.ParkingSpotsPresenter;
 import com.example.ryan.weekendassignment3.views.ui.utils.rx.AppSchedulerProvider;
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -111,7 +112,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
 
         setUpMap();
 
-        getData();
+        checkNetwork();
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -127,6 +128,43 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
 
         });
 
+    }
+
+    public void checkNetwork(){
+
+        ReactiveNetwork.observeInternetConnectivity()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override public void accept(Boolean isConnectedToInternet) {
+
+                        if (isConnectedToInternet == true){
+
+                            getData();
+                        }
+
+                        else{
+
+                            View container = getActivity().findViewById(android.R.id.content);
+
+                            // Define the click listener as a member
+                            View.OnClickListener snackOnClickListener = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    checkNetwork();
+                                }
+                            };
+
+                            if(container!=null) {
+                                Snackbar.make(container, R.string.snackbar_text2, Snackbar.LENGTH_INDEFINITE)
+                                        .setAction(R.string.snackbar_action2, snackOnClickListener)
+                                        .show();
+                            }
+                        }
+
+                    }
+                });
     }
 
     private void getData() {
@@ -184,6 +222,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
 
     @Override
     public void onFetchDataError(String message) {
+
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
     }
 
