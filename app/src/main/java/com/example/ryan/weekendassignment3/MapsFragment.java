@@ -15,6 +15,7 @@ import com.example.ryan.weekendassignment3.data.database.dbModel.RealmController
 import com.example.ryan.weekendassignment3.data.database.dbModel.RealmReservation;
 import com.example.ryan.weekendassignment3.data.network.model.ParkingSpot;
 import com.example.ryan.weekendassignment3.data.network.model.ParkingSpotDetails;
+import com.example.ryan.weekendassignment3.injection.PresenterComponent;
 import com.example.ryan.weekendassignment3.views.ParkingSpots.ParkingSpotsMvpView;
 import com.example.ryan.weekendassignment3.views.ParkingSpots.ParkingSpotsPresenter;
 import com.example.ryan.weekendassignment3.views.ui.utils.rx.AppSchedulerProvider;
@@ -50,7 +51,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
 
     private GoogleMap googleMap;
 
-    private ParkingSpotsPresenter parkingSpotsPresenter;
+    @Inject
+    ParkingSpotsPresenter parkingSpotsPresenter;
 
     private RealmController realmController;
     @BindView(R.id.mapView) MapView mMapView;
@@ -68,6 +70,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
         View v = inflater.inflate(R.layout.fragment_maps, container,
                 false);
         ButterKnife.bind(this, v);
+        injectDagger();
         mMapView.onCreate(savedInstanceState);
         initializePresenter();
         Realm.init(getContext());
@@ -94,6 +97,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
         }
 
         return v;
+    }
+
+    public void injectDagger(){
+
+        ((MyApp) MyApp.application ).getPresenterComponent().inject(this);
     }
 
     @Override
@@ -128,7 +136,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
 
     public void initializePresenter(){
 
-        parkingSpotsPresenter = new ParkingSpotsPresenter<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
+        //parkingSpotsPresenter = new ParkingSpotsPresenter<>(new AppDataManager(), new AppSchedulerProvider(), new CompositeDisposable());
         parkingSpotsPresenter.onAttach(this);
 
     }

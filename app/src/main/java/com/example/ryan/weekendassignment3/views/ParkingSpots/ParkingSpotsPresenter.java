@@ -24,6 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ParkingSpotsPresenter<V extends ParkingSpotsMvpView>
         extends BasePresenter<V> implements IParkingSpotsMvpPresenter<V>{
 
+    @Inject
     public ParkingSpotsPresenter(IDataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(dataManager, schedulerProvider, compositeDisposable);
     }
