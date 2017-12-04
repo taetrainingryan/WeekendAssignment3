@@ -7,16 +7,18 @@ import com.example.ryan.weekendassignment3.data.network.model.ParkingSpotDetails
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
 import io.reactivex.Observable;
 
 /**
  * Created by Ryan on 02/12/2017.
  */
 
+//@Singleton
 public class AppDataManager implements IDataManager {
 
     private ApiHelper apiHelper;
-
 
     public AppDataManager() {
         apiHelper = new AppApiHelper();

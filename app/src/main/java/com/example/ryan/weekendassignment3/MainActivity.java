@@ -9,11 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    ///private TextView mTextMessage;
     private FragmentManager fragmentManager;
-    BottomNavigationView navigation;
+    //BottomNavigationView navigation;
+    @BindView(R.id.navigation) BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -23,12 +27,10 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
                     switchToFragment1();
                     break;
 
                 case R.id.navigation_dashboard:
-                    //mTextMessage.setText(R.string.title_dashboard);
                     switchToFragment2();
                     break;
 
@@ -45,9 +47,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fragmentManager = getSupportFragmentManager();
+        ButterKnife.bind(this);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        //mTextMessage = (TextView) findViewById(R.id.message);
+        //navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation);
         fragmentManager.beginTransaction()

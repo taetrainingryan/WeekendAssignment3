@@ -16,6 +16,9 @@ import com.example.ryan.weekendassignment3.data.database.dbModel.RealmReservatio
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,8 +26,9 @@ import java.util.List;
 public class ReservationsFragment extends Fragment {
 
     private List<RealmReservation> reservations;
-    private RecyclerView recyclerView;
+    //private RecyclerView recyclerView;
     private ViewAdapter viewAdapter;
+    @BindView(R.id.rvReservations) RecyclerView recyclerView;
 
 
     public ReservationsFragment() {
@@ -36,8 +40,11 @@ public class ReservationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_reservations, container, false);
+        ButterKnife.bind(this, view);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reservations, container, false);
+        return view;
 
     }
 
@@ -52,7 +59,7 @@ public class ReservationsFragment extends Fragment {
 
         reservations = RealmController.getInstance().getreservations();
 
-        recyclerView = (RecyclerView) getView().findViewById(R.id.rvReservations);
+        //recyclerView = (RecyclerView) getView().findViewById(R.id.rvReservations);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         viewAdapter = new ViewAdapter(reservations, R.layout.row, getActivity().getApplicationContext());
 

@@ -13,6 +13,9 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Ryan on 03/12/2017.
  */
@@ -52,15 +55,20 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MyViewHolder>{
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView id, name, reservedUntil;
+        //TextView id, name, reservedUntil;
+        @BindView(R.id.tvId) TextView id;
+        @BindView(R.id.tvName) TextView name;
+        @BindView(R.id.tvReservedUntil) TextView reservedUntil;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            id = (TextView) itemView.findViewById(R.id.tvId);
-            name = (TextView) itemView.findViewById(R.id.tvName);
-            reservedUntil = (TextView) itemView.findViewById(R.id.tvReservedUntil);
+            //id = (TextView) itemView.findViewById(R.id.tvId);
+            //name = (TextView) itemView.findViewById(R.id.tvName);
+            //reservedUntil = (TextView) itemView.findViewById(R.id.tvReservedUntil);
 
+            ButterKnife.bind(this, itemView);
         }
     }
 }

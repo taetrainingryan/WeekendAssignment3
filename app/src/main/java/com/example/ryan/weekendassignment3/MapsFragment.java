@@ -33,6 +33,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -44,10 +48,14 @@ import io.realm.Realm;
  */
 public class MapsFragment extends Fragment implements OnMapReadyCallback, ParkingSpotsMvpView {
 
-    MapView mMapView;
+    //MapView mMapView;
     private GoogleMap googleMap;
+
+    //@Inject
     private ParkingSpotsPresenter parkingSpotsPresenter;
+
     private RealmController realmController;
+    @BindView(R.id.mapView) MapView mMapView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,14 +63,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
         setRetainInstance(true);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // inflat and return the layout
         View v = inflater.inflate(R.layout.fragment_maps, container,
                 false);
-        mMapView = (MapView) v.findViewById(R.id.mapView);
+        ButterKnife.bind(this, v);
+        //mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         initializePresenter();
         Realm.init(getContext());
