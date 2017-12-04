@@ -48,10 +48,8 @@ import io.realm.Realm;
  */
 public class MapsFragment extends Fragment implements OnMapReadyCallback, ParkingSpotsMvpView {
 
-    //MapView mMapView;
     private GoogleMap googleMap;
 
-    //@Inject
     private ParkingSpotsPresenter parkingSpotsPresenter;
 
     private RealmController realmController;
@@ -70,7 +68,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
         View v = inflater.inflate(R.layout.fragment_maps, container,
                 false);
         ButterKnife.bind(this, v);
-        //mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         initializePresenter();
         Realm.init(getContext());
@@ -87,7 +84,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
         }
 
         if(mapFragment!=null) {
-
             mapFragment.getMapAsync(this);
         }
 
@@ -150,9 +146,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Parkin
     }
 
     public void addMarkers(ParkingSpot parkingSpot, GoogleMap googleMap){
-
-        //double lat= Double.parseDouble(parkingSpot.getLat());
-        // double lng= Double.parseDouble(parkingSpot.getLng());
 
         LatLng location = new LatLng(parkingSpot.getLat(), parkingSpot.getLng());
 

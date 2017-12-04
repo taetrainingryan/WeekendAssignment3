@@ -9,5 +9,4 @@ import com.example.ryan.weekendassignment3.data.network.AppApiHelper;
 
 public interface IDataManager extends ApiHelper {
 
-
 }

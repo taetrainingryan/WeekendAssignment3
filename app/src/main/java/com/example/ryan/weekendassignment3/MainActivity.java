@@ -14,9 +14,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    ///private TextView mTextMessage;
     private FragmentManager fragmentManager;
-    //BottomNavigationView navigation;
     @BindView(R.id.navigation) BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -49,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         ButterKnife.bind(this);
 
-        //mTextMessage = (TextView) findViewById(R.id.message);
-        //navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation);
         fragmentManager.beginTransaction()
@@ -63,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void switchToFragment2() {
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, new ReservationsFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, new ReservationsFragment())
+                .addToBackStack("MapsFragment").commit();
     }
 
 
