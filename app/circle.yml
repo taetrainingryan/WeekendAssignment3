@@ -28,7 +28,7 @@ dependencies:
         - echo y | android update sdk --no-ui --all --filter build-tools-26.0.2
     override:
         # Force Gradle to pre-download dependencies for the app module (the default would only be for the root, which is useless)
-        - if [ -f ./gradlew ]; then ./gradlew app:dependencies --console=plain --no-daemon;else gradle app:dependencies --console=plain --no-daemon;fi
+        - chmod +x if [ -f ./gradlew ]; then ./gradlew app:dependencies --console=plain --no-daemon;else gradle app:dependencies --console=plain --no-daemon;fi
 
     cache_directories:
         # Android SDK
