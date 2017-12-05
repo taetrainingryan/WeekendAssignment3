@@ -2,7 +2,7 @@ machine:
     java:
         version: oraclejdk8
     environment:
-        ANDROID_HOME: /usr/local/android-sdk-linux
+        ANDROID_HOME: C:\Users\Ryan\AppData\Local\Android\Sdk
         ANDROID_BUILD_TOOLS: 26.0.2
         APPLICATION_ID: com.example.ryan.weekendassignment3
         FABRIC_API_KEY: 0000000000000000000000000000000000000000 
@@ -28,7 +28,7 @@ dependencies:
         - echo y | android update sdk --no-ui --all --filter build-tools-26.0.2
     override:
         # Force Gradle to pre-download dependencies for the app module (the default would only be for the root, which is useless)
-        - if [chmod +x -f ./gradlew ]; then ./gradlew app:dependencies --console=plain --no-daemon;else gradle app:dependencies --console=plain --no-daemon;fi
+        - if [ -f ./gradlew ]; then ./gradlew app:dependencies --console=plain --no-daemon;else gradle app:dependencies --console=plain --no-daemon;fi
 
     cache_directories:
         # Android SDK
