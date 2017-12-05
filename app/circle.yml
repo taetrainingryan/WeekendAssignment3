@@ -41,6 +41,8 @@ dependencies:
         # Gradle caches
         - /home/ubuntu/.gradle/caches/
         - /home/ubuntu/.gradle/wrapper/
+
+        #test
 #test:
 #  pre:
 #    - emulator -avd circleci-android22 -no-audio -no-window:
