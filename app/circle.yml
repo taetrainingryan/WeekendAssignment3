@@ -25,7 +25,7 @@ dependencies:
 
         # Install all the required SDK components
         - echo y | $ANDROID_HOME/tools/bin/sdkmanager --verbose "platform-tools" "build-tools;"$ANDROID_BUILD_TOOLS "extras;google;m2repository"
-        - echo |set /p="8933bad161af4178b1185d1a37fbf41ea5269c55" > "%ANDROID_HOME%\licenses\android-sdk-license"
+        - echo |set /p="8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME\licenses\android-sdk-license"
     override:
         # Force Gradle to pre-download dependencies for the app module (the default would only be for the root, which is useless)
         - echo y | android update sdk --no-ui --all --filter build-tools-26.0.2,android-26
